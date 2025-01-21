@@ -61,8 +61,6 @@ var capacitorWifi = (function (exports, core) {
 
     exports.Wifi = Wifi;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
 })({}, capacitorExports);
