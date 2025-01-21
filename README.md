@@ -1,11 +1,12 @@
-# ln-capacitor-wifi
+# capacitor-wifi
 
 Connect to Wifi through your capacitor plugin. Good for IoT device connections.
+Capacitor Version 7
 
 ## Install
 
 ```bash
-npm install ln-capacitor-wifi
+npm install https://github.com/codextde/capacitor-wifi.git
 npx cap sync
 ```
 
