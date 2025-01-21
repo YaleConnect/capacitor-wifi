@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-wifi",
+  "name": "@codext/capacitor-wifi",
   "version": "7.0.0",
   "description": "Connect to Wifi through your capacitor plugin. Good for IoT device connections.",
   "main": "dist/plugin.cjs.js",
@@ -13,14 +13,14 @@
     "ios/Plugin/",
     "LnCapacitorWifi.podspec"
   ],
-  "author": "Marcelo Luz",
+  "author": "Codext GmbH <info@codext.de>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lindsor/capacitor-wifi.git"
+    "url": "git+https://github.com/codextde/capacitor-wifi.git"
   },
   "bugs": {
-    "url": "https://github.com/Lindsor/capacitor-wifi.git/issues"
+    "url": "https://github.com/codextde/capacitor-wifi.git/issues"
   },
   "keywords": [
     "capacitor",

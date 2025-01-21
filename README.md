@@ -3,10 +3,12 @@
 Connect to Wifi through your capacitor plugin. Good for IoT device connections.
 Capacitor Version 7
 
+## Forked from https://github.com/Lindsor/capacitor-wifi.git
+
 ## Install
 
 ```bash
-npm install https://github.com/codextde/capacitor-wifi.git
+npm install @codext/capacitor-wifi
 npx cap sync
 ```
 
