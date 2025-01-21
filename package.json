@@ -1,6 +1,6 @@
 {
   "name": "@codext/capacitor-wifi",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Connect to Wifi through your capacitor plugin. Good for IoT device connections.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "LnCapacitorWifi.podspec"
+    "CodextCapacitorWifi.podspec"
   ],
   "author": "Codext GmbH <info@codext.de>",
   "license": "MIT",
