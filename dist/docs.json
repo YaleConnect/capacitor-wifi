@@ -30,6 +30,25 @@
         "slug": "getcurrentwifi"
       },
       {
+        "name": "checkWifiCredentialsBySsid",
+        "signature": "(connectToWifiRequest: ConnectToWifiRequest) => Promise<ConnectToWifiResult>",
+        "parameters": [
+          {
+            "name": "connectToWifiRequest",
+            "docs": "",
+            "type": "ConnectToWifiRequest"
+          }
+        ],
+        "returns": "Promise<ConnectToWifiResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ConnectToWifiResult",
+          "ConnectToWifiRequest"
+        ],
+        "slug": "connecttowifibyssidandpassword"
+      },
+      {
         "name": "connectToWifiBySsidAndPassword",
         "signature": "(connectToWifiRequest: ConnectToWifiRequest) => Promise<ConnectToWifiResult>",
         "parameters": [

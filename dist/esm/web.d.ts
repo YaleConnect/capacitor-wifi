@@ -8,4 +8,5 @@ export declare class WifiWeb extends WebPlugin implements WifiPlugin {
     requestPermissions(): Promise<PermissionStatus>;
     checkPermissions(): Promise<PermissionStatus>;
     disconnectAndForget(): Promise<void>;
+    checkWifiCredentialsBySsid(): Promise<ConnectToWifiResult>;
 }
