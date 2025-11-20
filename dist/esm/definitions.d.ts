@@ -60,5 +60,5 @@ export interface WifiPlugin {
     checkPermissions(): Promise<PermissionStatus>;
     requestPermissions(): Promise<PermissionStatus>;
     disconnectAndForget(): Promise<void>;
-    checkWifiCredentialsBySsid(): Promise<ConnectToWifiResult>;
+    checkWifiCredentialsBySsid(connectToWifiRequest: ConnectToWifiRequest): Promise<ConnectToWifiResult>;
 }
