@@ -343,6 +343,49 @@ public class Wifi {
         return capabilities;
     }
 
+    public void checkWifiCredentialsBySsid(String ssid, @Nullable String password, ConnectToWifiCallback callback) {
+        this.ensureWifiManager();
+
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q) {
+            // En versiones antiguas no hay forma segura de validar sin conectar
+            callback.onError(new WifiError(WifiErrorCode.METHOD_UNIMPLEMENTED));
+            return;
+        }
+
+        WifiNetworkSpecifier.Builder specifierBuilder = new WifiNetworkSpecifier.Builder()
+            .setSsid(ssid)
+            .setIsHiddenSsid(false);
+
+        if (password != null && !password.isEmpty()) {
+            specifierBuilder.setWpa2Passphrase(password);
+        }
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .setNetworkSpecifier(specifierBuilder.build())
+            .build();
+
+        ConnectivityManager.NetworkCallback tempCallback = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(@NonNull Network network) {
+                super.onAvailable(network);
+                // Contraseña correcta
+                callback.onConnected(null); // Puedes devolver info si quieres
+                // Liberar la red inmediatamente para no afectar la conexión actual
+                connectivityManager.unregisterNetworkCallback(this);
+            }
+
+            @Override
+            public void onUnavailable() {
+                super.onUnavailable();
+                // Contraseña incorrecta
+                callback.onError(new WifiError(WifiErrorCode.FAILED_TO_ENABLE_NETWORK));
+            }
+        };
+
+        this.connectivityManager.requestNetwork(networkRequest, tempCallback);
+    }
+
     // TODO: Remove once no longer needed
     @SuppressWarnings("deprecation")
     private void connectToWifiBySsidAndPasswordLegacy(String ssid, String password, ConnectToWifiCallback connectedCallback) {

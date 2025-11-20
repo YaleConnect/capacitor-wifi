@@ -192,4 +192,33 @@ public class WifiPlugin extends Plugin {
         result.put("wasSuccess", true);
         call.resolve(result);
     }
+
+    @PluginMethod
+    @PermissionCallback
+    public void checkWifiCredentialsBySsid(PluginCall call) {
+        if (!hasRequiredPermissions()) {
+            requestAllPermissions(call, "checkWifiCredentialsBySsid");
+            return;
+        }
+
+        String ssid = call.getString("ssid");
+        String password = call.getString("password");
+
+        this.checkWifiCredentialsBySsid(ssid, password, new ConnectToWifiCallback() {
+            @Override
+            public void onConnected(@Nullable WifiNetwork network) {
+                JSObject ret = new JSObject();
+                ret.put("wasSuccess", true);
+                call.resolve(ret);
+            }
+
+            @Override
+            public void onError(WifiError error) {
+                JSObject ret = new JSObject();
+                ret.put("wasSuccess", false);
+                ret.put("error", error.getCode().toString());
+                call.reject("Failed to validate credentials");
+            }
+        });
+    }
 }
