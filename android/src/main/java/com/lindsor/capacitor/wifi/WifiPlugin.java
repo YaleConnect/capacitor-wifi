@@ -204,21 +204,31 @@ public class WifiPlugin extends Plugin {
         String ssid = call.getString("ssid");
         String password = call.getString("password");
 
-        this.checkWifiCredentialsBySsid(ssid, password, new ConnectToWifiCallback() {
+        if (ssid == null || "".equals(ssid)) {
+            WifiError error = new WifiError(WifiErrorCode.MISSING_SSID_CONNECT_WIFI);
+            call.reject(error.code.name(), error.toCapacitorResult());
+            return;
+        }
+
+        ConnectToWifiCallback callback = new ConnectToWifiCallback() {
             @Override
-            public void onConnected(@Nullable WifiNetwork network) {
-                JSObject ret = new JSObject();
-                ret.put("wasSuccess", true);
-                call.resolve(ret);
+            public void onConnected(WifiEntry wifiEntry) {
+                JSObject result = new JSObject();
+                result.put("wasSuccess", true);
+
+                if (wifiEntry != null) {
+                    result.put("wifi", wifiEntry.toCapacitorResult());
+                }
+
+                call.resolve(result);
             }
 
             @Override
             public void onError(WifiError error) {
-                JSObject ret = new JSObject();
-                ret.put("wasSuccess", false);
-                ret.put("error", error.getCode().toString());
-                call.reject("Failed to validate credentials");
+                call.reject(error.toCapacitorRejectCode(), error.toCapacitorResult());
             }
-        });
+        };
+
+        wifi.checkWifiCredentialsBySsid(ssid, password, callback);
     }
 }
